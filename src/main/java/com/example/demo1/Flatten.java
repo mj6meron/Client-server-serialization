@@ -1,6 +1,8 @@
 package com.example.demo1;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +18,9 @@ public class Flatten extends Application {
 
     @Override
     public void start(Stage stage) {
+
+        // Create a label with instructions.
+        Label instructionLabel = new Label("Enter the details and save it to file person.ser by clicking \"Save\" button");
 
         // Create a label for the name field.
         Label nameLabel = new Label("Name");
@@ -36,7 +41,7 @@ public class Flatten extends Application {
         TextField ageTextField = new TextField();
 
         // Create a button to serialize the person object.
-        Button serializeButton = new Button("Serialize");
+        Button serializeButton = new Button("Save");
         serializeButton.setOnAction(event -> {
 
             // Get the name, address, and age from the text fields.
@@ -65,7 +70,11 @@ public class Flatten extends Application {
 
         // Create a VBox to layout the controls.
         VBox layout = new VBox();
+        layout.setSpacing(10); // Add some spacing between elements
+        layout.setPadding(new Insets(10, 50, 50, 50)); // Add padding around the VBox
+        layout.setAlignment(Pos.CENTER); // Center the controls in the VBox
         layout.getChildren().addAll(
+                instructionLabel,
                 nameLabel, nameTextField,
                 addressLabel, addressTextField,
                 ageLabel, ageTextField,
@@ -73,8 +82,9 @@ public class Flatten extends Application {
         );
 
         // Create a scene and set it on the stage.
-        Scene scene = new Scene(layout);
+        Scene scene = new Scene(layout, 600, 400); // Make the scene bigger
         stage.setScene(scene);
+        stage.setTitle("Person Saver"); // Add a title to the stage
         stage.show();
     }
 
