@@ -1,5 +1,6 @@
 package com.example.demo1;
 
+import com.company.Person;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,9 +11,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class Flatten extends Application {
 
@@ -20,7 +23,7 @@ public class Flatten extends Application {
     public void start(Stage stage) {
 
         // Create a label with instructions.
-        Label instructionLabel = new Label("Enter the details and save it to file person.ser by clicking \"Save\" button");
+        Label instructionLabel = new Label("Enter the details and send it to the server by clicking \"Send\" button");
 
         // Create a label for the name field.
         Label nameLabel = new Label("Name");
@@ -41,7 +44,7 @@ public class Flatten extends Application {
         TextField ageTextField = new TextField();
 
         // Create a button to serialize the person object.
-        Button serializeButton = new Button("Save");
+        Button serializeButton = new Button("Send");
         serializeButton.setOnAction(event -> {
 
             // Get the name, address, and age from the text fields.
@@ -50,14 +53,17 @@ public class Flatten extends Application {
             int age = Integer.parseInt(ageTextField.getText());
 
             // Create a Person object.
-            com.company.Person person = new com.company.Person(name, address, age);
+            Person person = new Person(name, address, age);
 
-            // Serialize the person object to a file.
+            // Serialize the person object and send it to the server.
             try {
-                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("person.ser"));
+                Socket socket = new Socket(InetAddress.getLocalHost(), 1234);
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
                 out.writeObject(person);
                 out.close();
-                System.out.println("Saved!");
+                System.out.println("Sent!");
+            } catch (UnknownHostException ex) {
+                ex.printStackTrace();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -84,7 +90,7 @@ public class Flatten extends Application {
         // Create a scene and set it on the stage.
         Scene scene = new Scene(layout, 600, 400); // Make the scene bigger
         stage.setScene(scene);
-        stage.setTitle("Person Saver"); // Add a title to the stage
+        stage.setTitle("Person Sender"); // Add a title to the stage
         stage.show();
     }
 
