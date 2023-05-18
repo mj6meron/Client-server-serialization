@@ -32,7 +32,7 @@ public class Server {
                         Object inputObj;
                         try {
                             while ((inputObj = in.readObject()) != null) {
-                                com.company.Person person = (com.company.Person) inputObj;
+                                com.example.demo1.Person person = (com.example.demo1.Person) inputObj;
                                 System.out.println("Received person object: " + person.getDetails());
 
                                 // Serialize the person object to a file.

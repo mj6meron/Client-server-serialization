@@ -1,6 +1,6 @@
 package com.example.demo1;
 
-import com.company.Person;
+import com.example.demo1.Person;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
