@@ -27,10 +27,10 @@ public class Inflate extends Application {
 
             // Read the person object from the file.
             try {
-                com.company.Person time;
+                Person time;
                 FileInputStream fis = new FileInputStream("person.ser");
                 ObjectInputStream in = new ObjectInputStream(fis);
-                time = (com.company.Person) in.readObject();
+                time = (com.example.demo1.Person) in.readObject();
                 in.close();
 
                 // Update the text field with the getDetails() text.

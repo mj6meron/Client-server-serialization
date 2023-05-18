@@ -50,7 +50,7 @@ public class Flatten extends Application {
             int age = Integer.parseInt(ageTextField.getText());
 
             // Create a Person object.
-            com.company.Person person = new com.company.Person(name, address, age);
+            com.example.demo1.Person person = new com.example.demo1.Person(name, address, age);
 
             // Serialize the person object to a file.
             try {
