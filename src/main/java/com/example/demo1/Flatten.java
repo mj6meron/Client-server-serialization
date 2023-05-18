@@ -57,7 +57,8 @@ public class Flatten extends Application {
 
             // Serialize the person object and send it to the server.
             try {
-                Socket socket = new Socket(InetAddress.getLocalHost(), 1234);
+                String serverIP = "194.47.45.146";
+                Socket socket = new Socket(InetAddress.getByName(serverIP), 1234);
                 ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
                 out.writeObject(person);
                 out.close();
